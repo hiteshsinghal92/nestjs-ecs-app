@@ -5,14 +5,16 @@ WORKDIR /app
 COPY package.json ./
 RUN npm install
 COPY . .
-RUN npm run build
+EXPOSE 5000
+CMD [ "npm","run","start" ]
+# RUN npm run build
 
 #stage 2 run stage
-FROM node:18
-WORKDIR /app
-COPY --from=builder /app/dist ./dist
-COPY package.json ./
+# FROM node:18
+# WORKDIR /app
+# COPY --from=builder /app/dist ./dist
+# COPY package.json ./
 
-RUN npm install --only=production
+# RUN npm install --only=production
 
-CMD ["node", "dist/main"]
+# CMD ["node", "dist/main"]
